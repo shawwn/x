@@ -1,0 +1,1 @@
+var app = new µ.app(plt, plt.init, plt.think, plt.render, 10);

@@ -1,0 +1,49 @@
+html,body
+{
+	background-color:	#000;
+	color:				#fff;
+	padding:			0;
+	margin:				0;
+/*	overflow:			hidden;*/
+}
+
+
+.jsboxx_menu_link
+{
+	display:			block;
+	border-radius: 		0.2em;
+	background: 		#f8f8f8;
+	text-decoration: 	none;
+	color: 				#aaa;
+	border-left: 		3px solid #ccc;
+	padding: 			3px 20px;
+	font-size:			0.9em;
+	-webkit-transition: all 0.75s ease-in-out;
+	-moz-transition: 	all 0.75s ease-in-out;
+	transition: 		all 0.75s ease-in-out;
+}
+
+.jsboxx_menu_link:hover
+{
+	border-left: 		3px solid #fe0;
+	background: 		#ff0;
+	color:				#000;
+	padding-left: 		50px;
+	font-size:			1.15em;
+	-webkit-transition: all 0.15s ease-in-out;
+	-moz-transition: 	all 0.15s ease-in-out;
+	transition: 		all 0.15s ease-in-out;
+}
+
+
+.jsboxx_menu_link.broken
+{
+	border-left: 		3px solid #c00;
+}
+
+.jsboxx_menu_link.broken:hover 
+{
+	border-left: 		3px solid #f00;
+	background: 		#f00;
+
+}

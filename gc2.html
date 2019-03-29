@@ -1,0 +1,192 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Incremental GC Example</title></head>
+
+<body style="background:#eee;">
+
+<script>
+
+PerfGraph = function(canvas_id)
+{
+
+    console.log('hi');
+    this.buckets = [];
+
+    this.bucket_count = 500;
+    this.bucket_index = 0;
+    this.sample_freq = 16;
+    this.border = 1;
+    this.border_right = 30;
+
+    this.scale_x = 1;
+    this.size_y = 350;
+
+    this.stopped = 0;
+
+    this.xpos = function(index)
+    {
+        return this.border + index * this.scale_x;
+    }
+
+
+    this.canvas_width = function()
+    {
+        return this.border + this.bucket_count * this.scale_x + this.border_right;
+    }
+
+    this.ypos = function(delay, dolog)
+    {
+        var r = this.size_y - Math.log(delay) * ( this.size_y / 7);
+
+        //if (dolog) console.log('ypos', r, this.size_y, delay);
+
+        if (r < 1) return 1;
+        return r;
+    }
+
+    this.drawScale = function(delay)
+    {
+        this.ctx.fillStyle = 'rgb(150,150,150)';
+        this.ctx.strokeStyle = 'rgb(150,150,150)';
+        this.ctx.fillText(''+delay+'ms', this.xpos(this.bucket_count) + 4, this.ypos(delay, true) + 3);
+
+        //console.log('drawscale', delay, this.xpos(this.bucket_count), this.ypos(delay));
+
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.xpos(0), this.ypos(delay));
+        this.ctx.lineTo(this.xpos(this.bucket_count), this.ypos(delay));
+        this.ctx.stroke();
+        this.ctx.strokeStyle = 'rgb(0,0,0)';
+        this.ctx.fillStyle = 'rgb(0,0,0)';
+    }
+
+    this.drawGraph = function()
+    {
+        //console.log('draw', this.canvas_width(), this.size_y);
+        this.ctx.clearRect(0, 0, this.canvas_width(), this.size_y);
+
+        this.drawScale(1);
+        this.drawScale(2);
+        this.drawScale(4);
+        this.drawScale(8);
+        this.drawScale(16);
+        this.drawScale(32);
+        this.drawScale(64);
+        this.drawScale(128);
+        this.drawScale(256);
+        this.drawScale(512);
+        this.drawScale(1024);
+
+        var
+            worst = 0, worstpos = 0,
+            best = 999999999999, bestpos = 0;
+        this.ctx.beginPath();
+        for (var i = 0; i < this.bucket_count; i++) {
+            this.ctx.lineTo(this.xpos(i), this.ypos(this.buckets[i]));
+            if (this.buckets[i] >= worst)
+            {
+                worst = this.buckets[i];
+                worstpos = i;
+            }
+            if (this.buckets[i] <= best)
+            {
+                best = this.buckets[i];
+                bestpos = i;
+            }
+        }
+        this.ctx.stroke();
+
+        if (worst)
+        {
+            this.ctx.fillStyle = 'rgb(255,0,0)';
+            this.ctx.fillText(''+(Math.round(worst * 10) / 10)+'ms', this.xpos(worstpos) - 10, this.ypos(worst) - 14);
+        }
+        if (best < 999999999999)
+        {
+            this.ctx.fillStyle = 'rgb(0,0,255)';
+            this.ctx.fillText(''+(Math.round(best * 10) / 10)+'ms', this.xpos(bestpos) - 10, this.ypos(best) - 14);
+        }
+        this.ctx.fillStyle = 'rgba(255,255,0,0.5)';
+
+        this.ctx.beginPath();
+        var where = this.bucket_index % this.bucket_count;
+        this.ctx.arc(this.xpos(where), this.ypos(this.buckets[where]), 5, 0, Math.PI*2, true);
+        this.ctx.fill();
+    }
+
+    function stopstart()
+    {
+        if (stopped) {
+            window.requestAnimationFrame(handler);
+            prev = window.performance.now();
+            start += prev - stopped;
+            document.getElementById('stop').value = 'Stop';
+            stopped = 0;
+        } else {
+            document.getElementById('stop').value = 'Start';
+            stopped = window.performance.now();
+        }
+    }
+
+    console.log('ya');
+
+    self = this;
+
+    this.handler = function()
+    {
+        if (self.stopped)
+            return;
+
+        timestamp = window.performance.now(); 
+
+        var delay = timestamp - self.prev;
+        self.prev = timestamp;
+
+        var t = timestamp - self.start;
+        var newIndex = Math.round(t / self.sample_freq);
+        while (self.bucket_index < newIndex)
+        {
+            self.bucket_index++;
+            self.buckets[self.bucket_index % self.bucket_count] = delay;
+        }
+
+        self.drawGraph();
+        window.requestAnimationFrame(self.handler);
+    }
+
+    for (var i = 0; i < this.bucket_count; i++)
+    {
+        this.buckets[i] = 0;
+    }
+
+    var requestAnimationFrame =
+        window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+    window.requestAnimationFrame = requestAnimationFrame;
+
+    this.start = this.prev = window.performance.now();
+    this.canvas = document.getElementById(canvas_id);
+    this.canvas.style.width = this.canvas_width() + 'px';
+    this.canvas.width = this.canvas_width();
+
+    this.canvas.style.height = this.size_y + 'px';
+    this.canvas.height = this.size_y;
+
+    this.ctx = this.canvas.getContext('2d');
+
+    window.requestAnimationFrame(this.handler);
+
+    console.log('bai');
+
+}
+
+</script>
+
+<canvas id="graph" width="450" height="550"></canvas>
+
+<script>
+console.log('letsgo');
+graph = new PerfGraph("graph");
+</script>
+
+</body>
+</html>

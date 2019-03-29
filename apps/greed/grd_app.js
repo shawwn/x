@@ -1,0 +1,1 @@
+var app = new µ.app(grd, grd.init, grd.think, grd.render);

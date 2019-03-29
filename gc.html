@@ -1,0 +1,174 @@
+<!DOCTYPE html><html>
+<head><meta charset="UTF-8"><title>Incremental GC Example</title></head>
+
+<body onload="onload()" onunload="onunload()" style="background:#eee;">
+
+<script>
+var delays = [];
+
+var numSamples = 500;
+var sampleIndex = 0;
+var sampleTime = 16;
+var border = 1;
+var border_right = 30;
+
+var scale_x = 1;
+var size_y = 350;
+
+var garbage = [];
+var garbageSize = 1024 * 1024 * 6;
+var garbageIndex = 0;
+
+var stopped = 0;
+
+function xpos(index)
+{
+    return border + index * scale_x;
+}
+
+
+function canvas_width()
+{
+    return border + numSamples * scale_x + border_right;
+}
+
+function ypos(delay)
+{
+    var r = size_y - Math.log(delay) * ( size_y / 7);
+    //if (r < 5) return 5;
+    return r;
+}
+
+function drawScale(delay)
+{
+    ctx.fillStyle = 'rgb(150,150,150)';
+    ctx.strokeStyle = 'rgb(150,150,150)';
+    ctx.fillText(''+delay+'ms', xpos(numSamples) + 4, ypos(delay) + 3);
+
+    ctx.beginPath();
+    ctx.moveTo(xpos(0), ypos(delay));
+    ctx.lineTo(xpos(numSamples), ypos(delay));
+    ctx.stroke();
+    ctx.strokeStyle = 'rgb(0,0,0)';
+    ctx.fillStyle = 'rgb(0,0,0)';
+}
+
+function drawGraph()
+{
+    ctx.clearRect(0, 0, canvas_width(), size_y);
+
+    drawScale(1);
+    drawScale(2);
+    drawScale(4);
+    drawScale(8);
+    drawScale(16);
+    drawScale(32);
+    drawScale(64);
+    drawScale(128);
+    drawScale(256);
+    drawScale(512);
+    drawScale(1024);
+
+    var worst = 0, worstpos = 0;
+    var best = 999999999999, bestpos = 0;
+    ctx.beginPath();
+    for (var i = 0; i < numSamples; i++) {
+        ctx.lineTo(xpos(i), ypos(delays[i]));
+        if (delays[i] >= worst) {
+            worst = delays[i];
+            worstpos = i;
+        }
+        if (delays[i] <= best) {
+            best = delays[i];
+            bestpos = i;
+        }
+    }
+    ctx.stroke();
+
+    if (worst)
+    {
+	    ctx.fillStyle = 'rgb(255,0,0)';
+        ctx.fillText(''+(Math.round(worst * 10) / 10)+'ms', xpos(worstpos) - 10, ypos(worst) - 14);
+    }
+    if (best < 999999999999)
+    {
+	    ctx.fillStyle = 'rgb(0,0,255)';
+        ctx.fillText(''+(Math.round(best * 10) / 10)+'ms', xpos(bestpos) - 10, ypos(best) - 14);
+    }
+    ctx.fillStyle = 'rgba(255,255,0,0.5)';
+
+    ctx.beginPath();
+    var where = sampleIndex % numSamples;
+    ctx.arc(xpos(where), ypos(delays[where]), 5, 0, Math.PI*2, true);
+    ctx.fill();
+}
+
+function stopstart()
+{
+    if (stopped) {
+        window.requestAnimationFrame(handler);
+        prev = window.performance.now();
+        start += prev - stopped;
+        document.getElementById('stop').value = 'Stop';
+        stopped = 0;
+    } else {
+        document.getElementById('stop').value = 'Start';
+        stopped = window.performance.now();
+    }
+}
+
+function handler(timestamp)
+{
+    if (stopped)
+        return;
+
+    timestamp = window.performance.now(); 
+
+    var elt = document.getElementById('data');
+    var delay = timestamp - prev;
+    prev = timestamp;
+
+    var t = timestamp - start;
+    var newIndex = Math.round(t / sampleTime);
+    while (sampleIndex < newIndex)
+    {
+		sampleIndex++;
+        delays[sampleIndex % numSamples] = delay;
+    }
+
+    drawGraph();
+    window.requestAnimationFrame(handler);
+}
+
+function onload()
+{
+    for (var i = 0; i < numSamples; i++)
+        delays[i] = 0;
+
+    var requestAnimationFrame =
+        window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+        window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+    window.requestAnimationFrame = requestAnimationFrame;
+
+    start = prev = window.performance.now();
+    canvas = document.getElementById('graph');
+	canvas.style.width = canvas_width() + 'px';
+	canvas.width = canvas_width();
+
+	canvas.style.height = size_y + 'px';
+	canvas.height = size_y;
+
+    ctx = canvas.getContext('2d');
+    window.requestAnimationFrame(handler);
+}
+
+
+</script>
+
+<canvas id="graph" width="450" height="550"></canvas>
+
+<p>
+<input type="button" id="stop" value="Stop" onclick="stopstart()"></input>
+
+</body>
+</html>

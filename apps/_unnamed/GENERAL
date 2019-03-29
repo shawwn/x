@@ -1,0 +1,40 @@
+GENERAL
+
+	time can be sped up or slowed down, and paused
+
+
+	fixed portals that can be traveled between, and the ability to make temporary ones
+	temporary portals decay after some time, becoming unstable before they disappear
+	unstable portals lead to a random place near the portal, the more unstable the wider the range
+	unstable portals emit a burst of damage, the more unstable the bigger
+		so if you have bad luck and a super unstable portal teleports you exactly on itself, you're toast
+		otherwise, 
+
+PLAYER PARTY
+
+	any member can be selected to be directly controlled, the others will use their last  set behaviour
+	behaviours can be defined and selected on the fly:
+		follow distance
+		follow side (front, side, behind to the side, directly behind)
+
+
+NPC types:
+
+	adventurer
+
+		roams around, killing monsters and selling the loot to traders
+
+	guard
+
+	stationary trader
+
+	traveling trader
+
+	healer
+
+	trainer
+
+	unnamed
+
+		these get spawned in camps and towns, cannot be interacted with and convert into an NPC when one needs to be spawned
+		they flee combat, hurting them hurts standing with the group they are associated with

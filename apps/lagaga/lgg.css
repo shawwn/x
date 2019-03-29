@@ -1,0 +1,39 @@
+.lgg table
+{
+	border-spacing:		0;
+	font-family:		Tahoma, Arial, sans-serif;
+	font-size:			0.8em;
+}
+
+.lgg table td
+{
+	padding:			0.1em 0.5em;
+	border-top:			1px solid #ffffff;
+	border-left:		1px solid #ffffff;
+	border-right:		1px solid #e0e0e0;
+	border-bottom:		1px solid #e0e0e0;
+	background:			#f0f0f0;
+}
+
+.lgg table th
+{
+	font-size:			0.7em;
+	padding:			0.3em 0.25em;
+	border-top:			1px solid #707070;
+	border-left:		1px solid #707070;
+	border-right:		1px solid #303030;
+	border-bottom:		1px solid #303030;
+	background:			#505050;
+}
+
+
+.lgg table th a
+{
+	text-decoration:	none;
+	color:				#f8f800;
+}
+
+.lgg table th a:hover
+{
+	color:				#ffff00;
+}
