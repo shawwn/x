@@ -1,3 +1,3 @@
-click here to play:
+click to play:
 
 https://raw.githack.com/shawwn/x/master/index.html?revret
