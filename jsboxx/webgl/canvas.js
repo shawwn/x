@@ -268,6 +268,7 @@
 	image.onload = function() {
 		self.handle_texture_load(image, texture, texture_count, filter_nearest, callback, clamp_to_edge);
 	};
+	image.crossOrigin = '';
 	image.src = image_url;
 	this.textures[this.texture_count] = texture;
 	this.texture_count++;
