@@ -210,7 +210,7 @@ rvr.init = [
 	},
 	function(bootloader_status)
 	{
-		rvr.framebuffer_gamemap = new µ.WebGL_Framebuffer(rvr.c, rvr.c.gl, rvr.c.textures, 1024);
+		rvr.framebuffer_gamemap = new µ.WebGL_Framebuffer(rvr.c, rvr.c.gl, rvr.c.textures, 512);
 		bootloader_status.info = 'Lights';
 	},
 	function(bootloader_status)
