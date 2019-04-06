@@ -18,6 +18,97 @@ jsb_options = {
 
 jsb_apps = {
 
+	'?x': {
+			title:	'X',
+			scripts: [
+				[
+					'apps/_revret/rvr.js',
+				],
+				[
+					'apps/_revret/rvr_strings.js',
+
+					'apps/_revret/presets/particle_definitions.js',
+
+					'apps/_revret/presets/agents/bandit.js',
+					'apps/_revret/presets/agents/drone.js',
+					'apps/_revret/presets/agents/drone_coward.js',
+					'apps/_revret/presets/agents/drone_scout.js',
+					'apps/_revret/presets/agents/drone_scout_armoured.js',
+					'apps/_revret/presets/agents/drone_sentinel.js',
+					'apps/_revret/presets/agents/drone_teaser.js',
+					'apps/_revret/presets/agents/player.js',
+					'apps/_revret/presets/agents/player_drone.js',
+					'apps/_revret/presets/agents/rebel.js',
+					'apps/_revret/presets/agents/survivor.js',
+					'apps/_revret/presets/agents/turret.js',
+
+					'apps/_revret/presets/map_generators/test.js',
+					'apps/_revret/presets/map_sectors/basic.js',
+
+					'apps/_revret/presets/projectiles/ball_lightning.js',
+					'apps/_revret/presets/projectiles/blob.js',
+					'apps/_revret/presets/projectiles/fireball.js',
+					'apps/_revret/presets/projectiles/firepuff.js',
+					'apps/_revret/presets/projectiles/missile.js',
+					'apps/_revret/presets/projectiles/plasma.js',
+					'apps/_revret/presets/projectiles/plasma_nade_stage1.js',
+					'apps/_revret/presets/projectiles/plasma_nade_stage2.js',
+
+					'apps/_revret/presets/weapons/ball_lightning.js',
+					'apps/_revret/presets/weapons/drone_fireballs_360.js',
+					'apps/_revret/presets/weapons/drone_fireballs_spread.js',
+					'apps/_revret/presets/weapons/drone_fireballs_spread_fan.js',
+					'apps/_revret/presets/weapons/fireballs.js',
+					'apps/_revret/presets/weapons/flamethrower.js',
+					'apps/_revret/presets/weapons/plasma_burst.js',
+					'apps/_revret/presets/weapons/plasma_grenade.js',
+					'apps/_revret/presets/weapons/plasma_pistol.js',
+				],
+				[
+					'apps/_revret/game/agent/agent.js',
+					'apps/_revret/game/agent_memory.js',
+					'apps/_revret/game/agent_memory_slot.js',
+					'apps/_revret/game/agents.js',
+					'apps/_revret/game/faction.js',
+					'apps/_revret/game/factions.js',
+					'apps/_revret/game/game.js',
+
+					'apps/_revret/game/GUI.js',
+					'apps/_revret/game/lights.js',
+					'apps/_revret/game/map/map.js',
+					'apps/_revret/game/map/map_polygon.js',
+					'apps/_revret/game/map/map_generator.js',
+					'apps/_revret/game/player.js',
+					'apps/_revret/game/player__remote_eye.js',
+					'apps/_revret/game/pickup.js',
+					'apps/_revret/game/pickups.js',
+					'apps/_revret/game/projectile.js',
+					'apps/_revret/game/projectiles.js',
+					'apps/_revret/game/scents.js',
+					'apps/_revret/game/weapon.js',
+				],
+				[
+					'apps/_revret/game/agent/agent__draw.js',
+					'apps/_revret/game/agent/agent__draw_lights.js',
+					'apps/_revret/game/agent/agent__scents.js',
+					'apps/_revret/game/agent/agent__think.js',
+					'apps/_revret/game/agent/agent__to_agent.js',
+
+					'apps/_revret/rvr_think.js',
+					'apps/_revret/rvr_think__in_map.js',
+					'apps/_revret/rvr_init.js',
+					'apps/_revret/rvr_render.js',
+					'apps/_revret/rvr_render__in_map.js',
+					'apps/_revret/rvr_render__intro.js',
+					'apps/_revret/rvr_render_debug.js',
+					'apps/_revret/rvr_render_minimap.js',
+				],
+				[
+					'apps/_revret/rvr_app.js',
+				]
+			],
+	},
+
 	'?heliumcouncil':
 	{
 			title:	'Helium Council',
@@ -284,98 +375,6 @@ jsb_apps = {
 					'apps/dodgy/ddg_app.js',
 				],
 			]
-	},
-
-
-	'?revret': {
-			title:	'RevRet',
-			scripts: [
-				[
-					'apps/_revret/rvr.js',
-				],
-				[
-					'apps/_revret/rvr_strings.js',
-
-					'apps/_revret/presets/particle_definitions.js',
-
-					'apps/_revret/presets/agents/bandit.js',
-					'apps/_revret/presets/agents/drone.js',
-					'apps/_revret/presets/agents/drone_coward.js',
-					'apps/_revret/presets/agents/drone_scout.js',
-					'apps/_revret/presets/agents/drone_scout_armoured.js',
-					'apps/_revret/presets/agents/drone_sentinel.js',
-					'apps/_revret/presets/agents/drone_teaser.js',
-					'apps/_revret/presets/agents/player.js',
-					'apps/_revret/presets/agents/player_drone.js',
-					'apps/_revret/presets/agents/rebel.js',
-					'apps/_revret/presets/agents/survivor.js',
-					'apps/_revret/presets/agents/turret.js',
-
-					'apps/_revret/presets/map_generators/test.js',
-					'apps/_revret/presets/map_sectors/basic.js',
-
-					'apps/_revret/presets/projectiles/ball_lightning.js',
-					'apps/_revret/presets/projectiles/blob.js',
-					'apps/_revret/presets/projectiles/fireball.js',
-					'apps/_revret/presets/projectiles/firepuff.js',
-					'apps/_revret/presets/projectiles/missile.js',
-					'apps/_revret/presets/projectiles/plasma.js',
-					'apps/_revret/presets/projectiles/plasma_nade_stage1.js',
-					'apps/_revret/presets/projectiles/plasma_nade_stage2.js',
-
-					'apps/_revret/presets/weapons/ball_lightning.js',
-					'apps/_revret/presets/weapons/drone_fireballs_360.js',
-					'apps/_revret/presets/weapons/drone_fireballs_spread.js',
-					'apps/_revret/presets/weapons/drone_fireballs_spread_fan.js',
-					'apps/_revret/presets/weapons/fireballs.js',
-					'apps/_revret/presets/weapons/flamethrower.js',
-					'apps/_revret/presets/weapons/plasma_burst.js',
-					'apps/_revret/presets/weapons/plasma_grenade.js',
-					'apps/_revret/presets/weapons/plasma_pistol.js',
-				],
-				[
-					'apps/_revret/game/agent/agent.js',
-					'apps/_revret/game/agent_memory.js',
-					'apps/_revret/game/agent_memory_slot.js',
-					'apps/_revret/game/agents.js',
-					'apps/_revret/game/faction.js',
-					'apps/_revret/game/factions.js',
-					'apps/_revret/game/game.js',
-
-					'apps/_revret/game/GUI.js',
-					'apps/_revret/game/lights.js',
-					'apps/_revret/game/map/map.js',
-					'apps/_revret/game/map/map_polygon.js',
-					'apps/_revret/game/map/map_generator.js',
-					'apps/_revret/game/player.js',
-					'apps/_revret/game/player__remote_eye.js',
-					'apps/_revret/game/pickup.js',
-					'apps/_revret/game/pickups.js',
-					'apps/_revret/game/projectile.js',
-					'apps/_revret/game/projectiles.js',
-					'apps/_revret/game/scents.js',
-					'apps/_revret/game/weapon.js',
-				],
-				[
-					'apps/_revret/game/agent/agent__draw.js',
-					'apps/_revret/game/agent/agent__draw_lights.js',
-					'apps/_revret/game/agent/agent__scents.js',
-					'apps/_revret/game/agent/agent__think.js',
-					'apps/_revret/game/agent/agent__to_agent.js',
-
-					'apps/_revret/rvr_think.js',
-					'apps/_revret/rvr_think__in_map.js',
-					'apps/_revret/rvr_init.js',
-					'apps/_revret/rvr_render.js',
-					'apps/_revret/rvr_render__in_map.js',
-					'apps/_revret/rvr_render__intro.js',
-					'apps/_revret/rvr_render_debug.js',
-					'apps/_revret/rvr_render_minimap.js',
-				],
-				[
-					'apps/_revret/rvr_app.js',
-				]
-			],
 	},
 
 	'1345345646734534597654': { title:	'',},

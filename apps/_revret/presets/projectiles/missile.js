@@ -26,7 +26,7 @@ rvr.presets.projectiles.missile =
 			angle, 0.2,
 			rvr.particles__explode_inner,
 			500,		//	lifespan
-			0, 1, 1, 0.5,
+			0, 1, 1, 1,
 			10,			//	vary_angle
 			0.5,		//	vary_angle_vel
 			0,			//	vary_pos_x
@@ -53,7 +53,7 @@ rvr.presets.projectiles.missile =
 			angle, 0.2,
 			rvr.particles__explode,
 			500,		//	lifespan
-			0, 1, 1, 0.5,
+			0, 1, 1, 1,
 			10,			//	vary_angle
 			0.5,		//	vary_angle_vel
 			0,			//	vary_pos_x
@@ -71,6 +71,17 @@ rvr.presets.projectiles.missile =
 	},
 	draw 						: function(self)
 	{
+		rvr.lights.add(
+			self.pos_x,
+			self.pos_y,
+			0.2,
+			1.4,
+			1.4,
+			0.5,
+			1.0, 0.95, 0.6, 1.0,
+			27,
+			180
+			);
 		rvr.c.rectangle_textured.draw(
 			rvr.CAM_PLAYER, rvr.tex_blob,
 			self.pos_x, self.pos_y,
@@ -133,7 +144,7 @@ rvr.presets.projectiles.missile =
 				0, 0.0,
 				rvr.particles__smoke_puff,
 				1000,		//	lifespan
-				0, 1, 1, 0.125,
+				0, 1, 1, 0.25,
 				360,		//	vary_angle
 				0.75,		//	vary_angle_vel
 				0.00001,			//	vary_pos_x
@@ -162,7 +173,7 @@ rvr.presets.projectiles.missile =
 				0, 0.0,
 				rvr.particles__smoke_puff,
 				1000,		//	lifespan
-				0, 1, 1, 0.125,
+				0, 1, 1, 0.25,
 				360,		//	vary_angle
 				1.75,		//	vary_angle_vel
 				0.00001,			//	vary_pos_x

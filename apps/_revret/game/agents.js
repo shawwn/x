@@ -6,7 +6,6 @@ rvr.Agents = function()
 	this.agent_closest_to_mouse = -1;
 	this.agent_closest_to_mouse_distance = -1;
 
-
 	this.currently_selected_agent = -1;
 
 	this.agent_presets_alive = {
@@ -34,7 +33,6 @@ rvr.Agents = function()
 	this.spawn_into_slot(0, 'player', rvr.AGENT_TYPE__PLAYER);
 	this.player_agent = 0;
 	rvr.player_agent = this.agents[0];
-
 
 	this.spawn_list = [
 		['bandit', 				0],

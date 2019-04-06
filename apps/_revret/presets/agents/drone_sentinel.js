@@ -16,7 +16,6 @@ rvr.presets.agents.drone_sentinel =
 		radius2							: 1.0,
 		weight							: 4.0,
 
-
 		keep_distance_to_attacked_min	: 3.5,
 		keep_distance_to_attacked_max	: 7.0,
 
@@ -25,7 +24,6 @@ rvr.presets.agents.drone_sentinel =
 
 		sight_range						: 24.0,
 		sight_range360					: 24.0,
-
 
 		light_range						: 2.0,
 		light_range360					: 2.0,
@@ -62,9 +60,6 @@ rvr.presets.agents.drone_sentinel =
 		var sat_factor = this.is_dying ? 0.0 : 1.0;
 
 		var damage_frac = (rvr.now - here.last_damage < 500) ? (1 - (rvr.now - here.last_damage) / 500) : 0;
-
-
-
 
 		rvr.c.rectangle_textured.draw(
 			rvr.CAM_PLAYER,
@@ -171,7 +166,6 @@ rvr.presets.agents.drone_sentinel =
 				-1,-1,-1,-1,
 				-1,-1,-1,-1,
 				-1,-1,-1,-1);
-
 
 		}
 	},

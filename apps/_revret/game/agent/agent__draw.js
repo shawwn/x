@@ -20,61 +20,6 @@ rvr.Agent.prototype.draw3 = function()
 
 	var this_index = this.index;
 
-
-	var weapon = this.weapons[this.selected_weapon];
-
-	var frac = 0;
-	var hue = 0;
-
-	if (weapon.state == rvr.WEAPONSTATE_WARMUP)
-	{
-		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.shot_warmup)
-		var hue = 0;
-	}
-	else if (weapon.state == rvr.WEAPONSTATE_INTERVAL)
-	{
-		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.shot_interval)
-		var hue = 30;
-	}
-	else if (weapon.state == rvr.WEAPONSTATE_COOLDOWN)
-	{
-		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.shot_cooldown)
-		var hue = 60;
-	}
-	else if (weapon.state == rvr.WEAPONSTATE_RELOAD_WARMUP)
-	{
-		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.reload_warmup)
-		var hue = 220;
-	}
-	else if (weapon.state == rvr.WEAPONSTATE_RELOAD_INTERVAL)
-	{
-		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.reload_interval)
-		var hue = 260;
-	}
-	else if (weapon.state == rvr.WEAPONSTATE_RELOAD_COOLDOWN)
-	{
-		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.reload_cooldown)
-		var hue = 300;
-	}
-
-	if (frac > 0)
-	{
-		rvr.c.rectangle_textured.draw(
-			rvr.CAM_PLAYER, rvr.tex_circle_thick_outline,
-			rvr_agents__pos_x[this_index],
-			rvr_agents__pos_y[this_index],
-			this.parameters.radius2 + frac,
-			this.parameters.radius2,
-			90,
-			hue, 1, 1, 0.8,
-			-1,-1,-1,-1,
-			-1,-1,-1,-1,
-			-1,-1,-1,-1);
-	}
-
-
-
-
 	if (!rvr.debug__draw_agent_directions)
 	{
 		return;
@@ -155,7 +100,6 @@ rvr.Agent.prototype.draw_debug = function()
 	var this_state = this.state;
 	var this_index = this.index;
 	var damage_frac = (rvr.now - this.last_damage < 500) ? (1 - (rvr.now - this.last_damage) / 500) : 0;
-	var hue = 320;
 	var sat = this.is_dying ? 0 : 1;
 
 	if (this.agent_closest_to_mouse != -1 && this.agent_closest_to_mouse != this_index)
@@ -164,7 +108,58 @@ rvr.Agent.prototype.draw_debug = function()
 		//return;
 	}
 
-	
+
+	var weapon = this.weapons[this.selected_weapon];
+
+	var frac = 0;
+	var hue = 0;
+
+	if (weapon.state == rvr.WEAPONSTATE_WARMUP)
+	{
+		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.shot_warmup)
+		var hue = 0;
+	}
+	else if (weapon.state == rvr.WEAPONSTATE_INTERVAL)
+	{
+		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.shot_interval)
+		var hue = 30;
+	}
+	else if (weapon.state == rvr.WEAPONSTATE_COOLDOWN)
+	{
+		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.shot_cooldown)
+		var hue = 60;
+	}
+	else if (weapon.state == rvr.WEAPONSTATE_RELOAD_WARMUP)
+	{
+		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.reload_warmup)
+		var hue = 220;
+	}
+	else if (weapon.state == rvr.WEAPONSTATE_RELOAD_INTERVAL)
+	{
+		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.reload_interval)
+		var hue = 260;
+	}
+	else if (weapon.state == rvr.WEAPONSTATE_RELOAD_COOLDOWN)
+	{
+		var frac = ((rvr.now - weapon.state_since) / weapon.parameters.reload_cooldown)
+		var hue = 300;
+	}
+
+	if (frac > 0)
+	{
+		rvr.c.rectangle_textured.draw(
+			rvr.CAM_PLAYER, rvr.tex_circle_outline,
+			rvr_agents__pos_x[this_index],
+			rvr_agents__pos_y[this_index],
+			this.parameters.radius2 + frac,
+			this.parameters.radius2,
+			90,
+			hue, 1, 1, 0.8,
+			-1,-1,-1,-1,
+			-1,-1,-1,-1,
+			-1,-1,-1,-1);
+	}
+
 
 
 	if (rvr.agents.currently_selected_agent == this_index)
